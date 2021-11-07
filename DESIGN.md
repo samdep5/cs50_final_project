@@ -31,18 +31,18 @@ login (login.html and login() in application.py):
 When a user first loads the webpage, they are taken to the rendered login.html page via a GET request that routes through the login() function in application.py. Login.html consists
 of two inputs of type text that a user can enter a username and password into. When they hit the submit button, the submission occurs via a POST request. With the POST request, in the
 login() function any previous user is forgotten, the username and password input values are checked to make sure they aren’t empty, and the username and password are compared against
-the users saved in the users table to check for an existing user with the same password hash. Once validated, the user will be logged in and taken to the index.html homepage.
+the users saved in the users table to check for an existing user with the same password hash. Once validated, the user will be logged in and taken to the plant.html homepage.
 
 register (register.html and register() in application.py):
 To register for an account, a person must click on the register button in the navigation bar on the login page, which will take them to register.html via a GET request where there are
 text fields to enter their username, password and password confirmation and a drop down menu (used to prevent errors that would likely occur in a text entry) to select their time zone
 (each entry corresponds to a timezone in the pytz library). A user would fill out the data and submit it via POST. Then, after ensuring the entries are not empty, the password and
 confirmation password components match, and the username is not taken, the username, hashed password, and pytz timezone text value are saved in the users table. The user is now logged
-in and redirected to the index.html page (the home page).
+in and redirected to the plant.html page (the home page).
 
-plant (index.html and plant() in application.py)
-After a user is logged in, they are taken to the index.html page via a GET request. In the index.html page, an if condition is established where a message According to the Jinja if
-statement in the index.html page, if no plants have been entered the page should read “Whoops, looks like you don't have any plants added!” so that it isn’t empty. When there are plants
+plant (plant.html and plant() in application.py)
+After a user is logged in, they are taken to the plant.html page via a GET request. In the plant.html page, an if condition is established where a message According to the Jinja if
+statement in the plant.html page, if no plants have been entered the page should read “Whoops, looks like you don't have any plants added!” so that it isn’t empty. When there are plants
 corresponding to the particular user, the next watering date for a plant is calculated (considering timezone) accordingly:
 - If the start date occurs after the current date (current date - start date is negative) the start date is the next watering day
 - If the current date - start date divided by frequency has no remainder, the current day is the watering day
@@ -50,7 +50,7 @@ corresponding to the particular user, the next watering date for a plant is calc
   frequency
 - If the current date - start date is less than the frequency, the next watering date is the current date plus the frequency minus (current date - start date)
 Calculating it this way allowed for the consideration of timezone. Based on these conditions, the next watering date is calculated and appended to the dictionary of a single plant's
-attributes within the list of all of the user’s plants. Then, in the index.html page a for loop (which was used for efficiency) loops through the plants list of each plant and its
+attributes within the list of all of the user’s plants. Then, in the plant.html page a for loop (which was used for efficiency) loops through the plants list of each plant and its
 attributes and displays the name and next watering time of the plant.
 
 addplant (addplant.html and addplant() in application.py):
@@ -58,21 +58,21 @@ To add a plant, a person must click on the Add Plant button in the navigation ba
 to enter the plant name, a number field to enter the watering frequency as a positive integer (using this form type with a min of 1 prevents decimal or negative entries), and the start
 date as a date (using a date form type ensures the date format will be correct and the popup calendar is user-friendly). A user would fill out the data and submit it via POST. Then,
 after ensuring the entries are not empty, the plant name is not a copy for the user, the user’s id, plant name, watering frequency and start date are saved in the users table. The user
-is now redirected to the index.html page (the home page) where their newly added plant is listed.
+is now redirected to the plant.html page (the home page) where their newly added plant is listed.
 
 editplant (editplant.html and editplant() in application.py):
 To edit a plant, a person must click on the Edit Plant button in the navigation bar once logged in which will take them to editplant.html via a GET request. If there are no plants logged
 by the user, the page will display “There aren’t any plants to edit yet!” which prevents users from filling out blank forms. If there are plants, the page displays a drop down to choose
 which of the user’s plants will be edited (which is created using a for loop in Jinja), followed by the same type of forms that were in the addplant.html. A user would fill out the data
 and submit it via POST. Then, after ensuring a plant was selected, and at least one field is changed, each form is checked for input and the table updated accordingly. I used a counter
-to determine if at least one field is changed and prevented repetitively checking for each form being empty. The user is now redirected to the index.html page (the home page) where their
+to determine if at least one field is changed and prevented repetitively checking for each form being empty. The user is now redirected to the plant.html page (the home page) where their
 newly updated plant is listed.
 
 deleteplant (deleteplant.html and deleteplant() in application.py):
 To delete a plant, a person must click on the Delete Plant button in the navigation bar once logged in which will take them to deleteplant.html via a GET request. If there are no plants
 logged by the user, the page will display “There aren’t any plants to delete yet!” which prevents users from interacting with blank forms. If there are plants, the page displays a drop
 down to choose which of the user’s plants will be deleted (which is created using a for loop in Jinja). A user would select the desired plant and submit it with the button via POST. Then,
-after ensuring a plant was selected, the plant is deleted from the plant table. The user is now redirected to the index.html page (the home page) where their deleted plant is no longer
+after ensuring a plant was selected, the plant is deleted from the plant table. The user is now redirected to the plant.html page (the home page) where their deleted plant is no longer
 listed.
 
 journal (journal.html, journalentry.html, deletejournal.html and journal(), journalentry(), deletejournal() in application.py):

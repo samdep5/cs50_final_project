@@ -85,7 +85,7 @@ def plant():
             plant["watermessage"] = resultdate.strftime("Next Watering is on %m/%d/%Y")
 
     # Render
-    return render_template("index.html", plants=plants)
+    return render_template("plant.html", plants=plants)
 
 
 @app.route("/addplant", methods=["GET", "POST"])
