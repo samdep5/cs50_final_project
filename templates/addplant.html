@@ -1,0 +1,21 @@
+{% extends "layout.html" %}
+{% block title %}
+    Add Plant
+{% endblock %}
+{% block main %}
+    <form action="/addplant" method="post">
+        <div class="form-group">
+            <input autocomplete="off" autofocus class="form-control" name="name" placeholder="Plant name" type="text">
+        </div>
+        <div class="form-group">
+            <input autocomplete="off" autofocus class="form-control" min="1" name="frequency" placeholder="Water Frequency (days)" type="number">
+        </div>
+        <div class='labeled'>
+            <label for="startdate">Start Date</label>
+        </div>
+        <div class="form-group">
+            <input autocomplete="off" autofocus class="form-control" name="startdate" type="date">
+        </div>
+        <button class="btn btn-success" type="submit">Add Plant</button>
+    </form>
+{% endblock %}

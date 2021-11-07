@@ -1,0 +1,24 @@
+{% extends "layout.html" %}
+
+{% block title %}
+    Delete Plant
+{% endblock %}
+
+{% block main %}
+{% if not plants %}
+    <h1 class='headers'>There aren't any plants to delete yet!</h1>
+{% else %}
+    <h1 class='headers'>May your plant rest in peace. Enter the name below so we can take it off your page! </h1>
+    <form action="/deleteplant" method="post">
+        <div class="form-group">
+            <select autocomplete="off" autofocus class="form-control" name="names" type="text">
+                <option value="" disabled selected hidden>Plant</option>
+                {% for plant in plants %}
+                <option value='{{ plant.id }}'>{{ plant.name }}</option>
+                {% endfor %}
+            </select>
+        </div>
+        <button class="btn btn-success" type="submit">Delete Plant</button>
+    </form>
+{% endif %}
+{% endblock %}

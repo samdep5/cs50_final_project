@@ -1,0 +1,23 @@
+{% extends "layout.html" %}
+
+{% block title %}
+    Plants
+{% endblock %}
+{% block main %}
+{% if not plants %}
+    <h1 class='headers'>Whoops, looks like you don't have any plants added!</h1>
+<!-- Referenced https://webdesign.tutsplus.com/tutorials/building-an-admin-dashboard-layout-with-css-and-a-touch-of-javascript--cms-33964 for structure -->
+{% else %}
+    <div>
+        <h1 class='headers'>My Plants</h1>
+    </div>
+    <section class="grid">
+        {% for plant in plants %}
+            <article class="box">
+                <h2 class='name'>{{ plant.name }}</h2>
+                <p>{{ plant.watermessage }}</p>
+            </article>
+        {% endfor %}
+    </section>
+{% endif %}
+{% endblock %}

@@ -1,0 +1,27 @@
+{% extends "layout.html" %}
+
+{% block title %}
+    Delete Entry
+{% endblock %}
+
+{% block main %}
+<div class="container">
+    {% if not journal %}
+    <br>
+        <h1 class='headers'>There aren't any entries to delete yet!</h1>
+    </br>
+    {% else %}
+     <h1 class='headers'>Select the entry you wish to delete</h1>
+      <form action="/deletejournal" method="post">
+        <div class="form-group">
+            <select autocomplete="off" autofocus class="form-control" name="entry" type="text">
+            <option value="" disabled selected hidden>Entry</option>
+            {% for note in journal %}
+            <option value='{{ note.id }}'>{{ note.date }} {{ note.title }}</option>
+            {% endfor %}
+            </select>
+        </div>
+        <button class="btn btn-success" type="submit">Delete Entry</button>
+    </form>
+    {% endif %}
+{% endblock %}

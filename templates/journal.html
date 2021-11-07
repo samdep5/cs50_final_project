@@ -1,0 +1,40 @@
+{% extends "layout.html" %}
+
+{% block title %}
+    Journal
+{% endblock %}
+
+{% block main %}
+<div class="container">
+    <h1 class='headers'>Plant Journal</h1>
+    <br>
+      <a href="/journalentry" class="btn btn-success pull-left">New entry</a>
+      <a href="/deletejournal" class="btn btn-success pull-right">Delete entry</a>
+    </br>
+    {% if not journal %}
+    <br>
+        <h1 class='headers'>No entries yet!</h1>
+    </br>
+    {% else %}
+    <br></br>
+    {% for note in journal %}
+    <div class="accordion" id="accordiontype">
+      <div class="card">
+        <div class="card-header" id="headingOne">
+          <h2 class="mb-0">
+            <button class="btn btn-link btn-block text-left" type="button" data-toggle="collapse" data-target="#collapseitem" aria-expanded="false" aria-controls="collapseOne">
+              {{ note.date }} {{ note.title }}
+            </button>
+          </h2>
+        </div>
+        <div id="collapseitem" class="collapse" aria-labelledby="headingOne" data-parent="#accordiontype">
+          <div class="card-body">
+            {{ note.entry }}
+          </div>
+        </div>
+      </div>
+    </div>
+
+    {% endfor %}
+    {% endif %}
+{% endblock %}
